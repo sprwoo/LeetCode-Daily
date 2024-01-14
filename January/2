@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<vector<int>> findMatrix(vector<int>& nums) {
+        unordered_map<int, int> map(nums.size()+1);
+        vector<vector<int>> ans;
+        for (int i : nums) {
+            if (map[i] >= ans.size()) {
+                ans.push_back({});
+            }
+
+            ans[map[i]].push_back(i);
+            map[i]++;
+        }
+
+        return ans;
+    }
+};
