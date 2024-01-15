@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool halvesAreAlike(string s) {
+        unordered_map<char, int> map {
+            {'a', 0}, {'e', 0}, {'i', 0}, {'o', 0}, {'u', 0},
+            {'A', 0}, {'E', 0}, {'I', 0}, {'O', 0}, {'U', 0},
+        };
+        int n = s.length()/2;
+
+        string word1 = s.substr(0,n), word2 = s.substr(n);
+
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (map.contains(word1[i])) ans++;
+            if (map.contains(word2[i])) ans--;
+        }
+
+        return !ans;
+    }
+};
