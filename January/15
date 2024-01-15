@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<vector<int>> findWinners(vector<vector<int>>& matches) {
+        vector<vector<int>> ans; 
+        unordered_map<int, int> freq; 
+
+        for (auto i : matches) {
+            freq[i[1]]++;
+
+            if (!freq.contains(i[0])) {
+                freq[i[0]] = 0;
+            }
+        }
+
+        vector<int> temp;
+        for (auto i : freq) {
+            if (i.second == 0) {
+                temp.push_back(i.first);
+            }
+        }
+
+        sort(temp.begin(), temp.end());
+        ans.push_back(temp);
+
+        temp = {};
+        for (auto i : freq) {
+            if (i.second == 1) {
+                temp.push_back(i.first);
+            }
+        }
+        sort(temp.begin(), temp.end());
+        ans.push_back(temp);
+
+        return ans;
+    }
+};
