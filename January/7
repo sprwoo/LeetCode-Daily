@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>& nums) {
+        // did NOT know how to do this
+        int ans = 0;
+        int n = nums.size();
+
+        vector<unordered_map <int, int>> dp (n);
+
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                long long diff = static_cast<long long>(nums[i]) - nums[j]; 
+
+                if (diff > INT_MAX || diff < INT_MIN)
+                    continue; 
+
+                int diff_int = static_cast<int>(diff);
+
+                dp[i][diff]++;
+
+                if (dp[j].count(diff)) {
+                    dp[i][diff] += dp[j][diff];
+                    ans += dp[j][diff];
+                }
+            }
+        }
+
+        return ans;
+    }
+};
